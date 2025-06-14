@@ -1,0 +1,11 @@
+tabcmd login -s https://your-tableau-server.com -t your-site-name -u your-username -p your-password
+tabcmd get "/workbooks/<workbook_name>.twbx" -f "<workbook_name>.twbx"
+tabcmd publish "Sales_Report.twbx" --project "Target Project Name" --name "Sales_Report" --overwrite
+
+$workbooks = @("Sales_Report", "Marketing_Dashboard", "Finance_Overview")
+
+foreach ($wb in $workbooks) {
+    tabcmd get "/workbooks/$wb.twbx" -f "$wb.twbx"
+    tabcmd publish "$wb.twbx" --project "Target Project Name" --name "$wb" --overwrite
+}
+
